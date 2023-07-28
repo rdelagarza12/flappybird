@@ -1,8 +1,10 @@
 import pygame
 from bird import Bird
+from floor import Base
 from sys import exit
 
-pygame.init
+
+pygame.init()
 
 screen = pygame.display.set_mode((450,650))
 clock = pygame.time.Clock()
@@ -12,10 +14,16 @@ background_surf = pygame.transform.scale(pygame.image.load("sprites/background-d
 background_base = pygame.transform.scale(pygame.image.load("sprites/base.png").convert_alpha(), (450,100))
 base_rect = background_base.get_rect(bottomleft = (0,690))
 
-
+# | ---------- BIRD------------|
 all_birds = pygame.sprite.GroupSingle()
 a_bird = Bird()
 all_birds.add(a_bird)
+
+#|----------- FLOOR ------------|
+all_floors = pygame.sprite.Group()
+a_floor_1 = Base(0,690)
+a_floor_2 = Base(450, 690)
+all_floors.add(a_floor_1, a_floor_2) 
 
 
 while running:
@@ -26,9 +34,13 @@ while running:
 
     screen.fill("black")
     screen.blit(background_surf, (0,0))
-    screen.blit(background_base, base_rect)
+    # screen.blit(background_base, base_rect)
+
     all_birds.draw(screen)
     all_birds.update()
+
+    all_floors.draw(screen)
+    all_floors.update()
 
     pygame.display.flip()
     clock.tick(60)
