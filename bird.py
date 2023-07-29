@@ -78,13 +78,13 @@ class Bird(pygame.sprite.Sprite):
                 self.gravity()
                 self.flap_animation()
                 if self.rotation_angle > -20:
-                    self.rotation_angle -= 5
+                    self.rotation_angle -= 20
                 
             else:
                 self.flying()
                 self.flap_animation()
                 if self.rotation_angle < 20:
-                    self.rotation_angle += 5
+                    self.rotation_angle += 20
             self.image = pygame.transform.rotate(self.bird_frames[self.frame_index], self.rotation_angle)
         else: 
             self.flap_animation()
