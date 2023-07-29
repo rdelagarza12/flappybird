@@ -32,6 +32,16 @@ while running:
             pygame.quit()
             exit()
 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE and a_bird.start == False:
+                a_bird.start = True
+                a_bird.falling = True
+            if event.key == pygame.K_SPACE and a_bird.falling == True:
+                a_bird.fly_speed = 0
+                a_bird.falling = False
+    
+
+
     screen.fill("black")
     screen.blit(background_surf, (0,0))
     # screen.blit(background_base, base_rect)

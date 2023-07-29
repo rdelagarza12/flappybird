@@ -4,7 +4,7 @@ class Base(pygame.sprite.Sprite):
 
     def __init__(self, x, y):
         pygame.sprite.Sprite.__init__(self)
-        base = pygame.transform.scale(pygame.image.load("sprites/base.png").convert_alpha(), (452,100))
+        base = pygame.transform.scale(pygame.image.load("sprites/base.png").convert_alpha(), (455,100))
         self.x = x
         self.y = y
         self.image = base
@@ -14,7 +14,7 @@ class Base(pygame.sprite.Sprite):
         if self.x <= -450:
             self.x = 450
         else:
-            self.x -= 2
+            self.x -= 3
             self.rect.x = self.x
 
     def update(self):
