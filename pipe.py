@@ -12,7 +12,7 @@ class Pipe(pygame.sprite.Sprite):
         self.passed = False
 
     def move_left(self):
-        self.rect.x -= 2
+        self.rect.x -= 4
 
     def update(self):
         self.move_left()

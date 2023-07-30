@@ -48,6 +48,10 @@ all_numbers.add(a_number_1)
 
 count_by_one = 0
 count_by_ten = 0
+count_by_hundred = 0
+
+#|----------- to check when the player has started playing
+game_started = False
 
 while running:
     for event in pygame.event.get():
@@ -56,6 +60,7 @@ while running:
             exit()
 
         if event.type == pygame.KEYDOWN:
+            game_started = True
             if event.key == pygame.K_SPACE and a_bird.start == False:
                 a_bird.start = True
                 a_bird.falling = True
@@ -71,38 +76,72 @@ while running:
     all_birds.draw(screen)
     all_birds.update()
 
-    top_pipes.draw(screen)
-    top_pipes.update()
-    
-    bottom_pipes.draw(screen)
-    bottom_pipes.update()
-    
-    for pipe in top_pipes:
-        if pipe.rect.x == 200:
-            random_number = random.randint(200,500)
-            new_top_pipe = Pipe(500, random_number, 0)
-            new_bottom_pipe = Pipe(408, (random_number - 1100), 180)
-            top_pipes.add(new_top_pipe)
-            bottom_pipes.add(new_bottom_pipe)
-        if pipe.rect.x == 100:
-            if count_by_ten  == 0 and count_by_one <= 8:
-                count_by_one += 1
-                a_number_1.change_number(count_by_one)
-            elif count_by_ten == 0 and count_by_one == 9:
-                count_by_ten += 1
-                count_by_one = 0
-                a_number_1.change_number(count_by_ten)
-                a_number_2 = Number(245,100, count)
-                all_numbers.add(a_number_2)
-            elif count_by_ten >= 1 and count_by_one <= 8:
-                count_by_one += 1
-                a_number_2.change_number(count_by_one)
-            elif count_by_ten >= 1 and count_by_one == 9:
-                count_by_ten += 1
-                count_by_one = 0
-                a_number_1.change_number(count_by_ten)
-                a_number_2.change_number(count_by_one)
-
+    if game_started:
+        top_pipes.draw(screen)
+        top_pipes.update()
+        
+        bottom_pipes.draw(screen)
+        bottom_pipes.update()
+        
+        for pipe in top_pipes:
+            if pipe.rect.x == 200:
+                random_number = random.randint(200,500)
+                new_top_pipe = Pipe(500, random_number, 0)
+                new_bottom_pipe = Pipe(408, (random_number - 1100), 180)
+                top_pipes.add(new_top_pipe)
+                bottom_pipes.add(new_bottom_pipe)
+            if pipe.rect.x == 100:
+                if count_by_ten  == 0 and count_by_one <= 8 and count_by_hundred == 0:
+                    count_by_one += 1
+                    a_number_1.change_number(count_by_one)
+                elif count_by_ten == 0 and count_by_one == 9 and count_by_hundred == 0:
+                    count_by_ten += 1
+                    count_by_one = 0
+                    a_number_1.change_number(count_by_ten)
+                    a_number_2 = Number(245,100, count)
+                    all_numbers.add(a_number_2)
+                elif count_by_ten >= 1 and count_by_one <= 8 and count_by_hundred == 0:
+                    count_by_one += 1
+                    a_number_2.change_number(count_by_one)
+                elif count_by_ten >= 1 and count_by_ten <= 8 and count_by_one == 9 and count_by_hundred == 0:
+                    count_by_ten += 1
+                    count_by_one = 0
+                    a_number_1.change_number(count_by_ten)
+                    a_number_2.change_number(count_by_one)
+                #|----------------------- attempt at adding triple digits
+                elif count_by_ten == 9 and count_by_one == 9 and count_by_hundred == 0:
+                    a_number_3 = Number(265,100, count)
+                    all_numbers.add(a_number_3)
+                    count_by_one = 0
+                    count_by_ten = 0
+                    count_by_hundred += 1
+                    a_number_1.change_number(count_by_hundred)
+                    a_number_2.change_number(count_by_ten)
+                elif count_by_ten <= 8 and count_by_one <= 8 and count_by_hundred >= 1 and count_by_hundred <= 8:
+                    count_by_one += 1
+                    a_number_3.change_number(count_by_one)
+                elif count_by_ten <= 8 and count_by_one == 9 and count_by_hundred >= 1 and count_by_hundred <= 8:
+                    count_by_ten += 1
+                    count_by_one = 0
+                    a_number_2.change_number(count_by_ten)
+                    a_number_3.change_number(count_by_one)
+                elif count_by_ten == 9 and count_by_one <= 8 and count_by_hundred >= 1 and count_by_hundred <= 8:
+                    count_by_one += 1
+                    a_number_3.change_number(count_by_one)
+                elif count_by_ten == 9 and count_by_one == 9 and count_by_hundred >= 1 and count_by_hundred <= 8:
+                    count_by_one = 0
+                    count_by_ten = 0
+                    count_by_hundred += 1
+                    a_number_1.change_number(count_by_hundred)
+                    a_number_2.change_number(count_by_ten)
+                    a_number_3.change_number(count_by_one)    
+                elif count_by_ten == 9 and count_by_one == 9 and count_by_hundred == 9:
+                    count_by_ten = 0
+                    count_by_one = 0
+                    count_by_hundred = 0
+                    a_number_1.change_number(count_by_hundred)
+                    a_number_2.change_number(count_by_ten)
+                    a_number_3.change_number(count_by_one)
 
 
     all_floors.draw(screen)
