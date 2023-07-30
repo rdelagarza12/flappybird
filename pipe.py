@@ -9,11 +9,12 @@ class Pipe(pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.rect = self.image.get_rect(topleft = (self.x, self.y))
+        self.passed = False
 
     def move_left(self):
         self.rect.x -= 2
 
     def update(self):
         self.move_left()
-        if self.rect.x == -300:
+        if self.rect.x == -1000:
             self.kill()
