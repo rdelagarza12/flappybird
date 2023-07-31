@@ -24,6 +24,7 @@ class Bird(pygame.sprite.Sprite):
         self.max_height = 5
         self.fly_speed = 0
         self.rotation_angle = 0
+    
 
     def flap_animation(self):
         if self.frame_counter >= self.frame_delay:
